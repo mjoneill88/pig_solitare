@@ -4,46 +4,54 @@ import random
 
 class Pig:
     def __init__(self):
-        self.points = 0
-    def change_points(self, number_points):
-        self.points += number_points
-    def choose_after_roll(self, turn_score):
-        return 0
+        self.turn_points = 0
+        self.total_points = 0
+        self.keep_rolling = True
+
+    def choose_after_roll(self, turn_points):
+        self.keep_rolling = False
+        return self.keep_rolling
 
 class RandomPig(Pig):
-    def __init__(self):
-        self.points = 0
-    def change_points(self, number_points):
-        self.points += number_points
-    def choose_after_roll(self, turn_score):
+    def choose_after_roll(self, turn_points):
         random_number=random.randint(0,1)
-
-
-
+        if random_number == 1:
+            self.keep_rolling = True
+            return self.keep_rolling
+        else:
+            self.keep_rolling = False
+            return self.keep_rolling
 
 class SmartPig(Pig):
-    pass
+    def choose_after_roll(self, turn_points):
+        pass
 
-player_1 = Pig()
+
+
+
+
+
+player_1 = RandomPig()
 
 def roll_die():
     return random.randint(1,6)
 
 
+
+
 def game_function(player):
-    turn_score = 0
-    choice=1
-    turn_over=0
     for _ in range(7):
-        while choice and not turn_over:
+        player.turn_points = 0
+        player.keep_rolling = True
+        while player.keep_rolling:
             dice_roll = roll_die()
-            print("DICE ROLL", dice_roll)
             if dice_roll == 1:
-                turn_score = 0
-                turn_over = 1
-            turn_score += dice_roll
-            choice = player.choose_after_roll(turn_score)
-        player.change_points(turn_score)
+                player.turn_points = 0
+                player.keep_rolling = False
+            else:
+                player.turn_points += dice_roll
+                player.keep_rolling = player.choose_after_roll(player.turn_points)
+            player.total_points += player.turn_points
 
 
     # for _ in range(7):
@@ -60,4 +68,4 @@ def game_function(player):
 
 
 game_function(player_1)
-print(player_1.points)
+print(player_1.__dict__)
