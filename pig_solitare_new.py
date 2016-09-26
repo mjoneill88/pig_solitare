@@ -47,8 +47,15 @@ def play_game(pig):
                 pig.score += dice_score
                 decide_to_roll_again = pig.roll_again()
 
-pig_player = Base_Pig()
+def simulate_trials(trials):
+    trial_results = []
+    while trials > 0:
+        pig_player = Five_Pig()
+        play_game(pig_player)
+        trial_results.append(pig_player.score)
+        pig_player.score = 0
+        trials -= 1
+    return trial_results
 
-play_game(pig_player)
-
-print(pig_player.score)
+trial_results = simulate_trials(10)
+print(trial_results)
