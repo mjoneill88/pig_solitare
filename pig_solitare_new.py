@@ -97,7 +97,7 @@ class Ninety_Percent_Pig:
          else:
              return False
 
-class Messing_With_Stuff_Pig:
+class Optimal_Pig:
      def __init__(self):
          self.score = 0
      def roll_again(self):
@@ -131,7 +131,7 @@ def play_game(pig):
 def simulate_trials(trials):
     trial_results = []
     while trials > 0:
-        pig_player = Seven_Rolls_Pig()
+        pig_player = Optimal_Pig()
         play_game(pig_player)
         trial_results.append(pig_player.score)
         pig_player.score = 0
