@@ -1,6 +1,15 @@
 
 import random
 
+class Optimal_Pig:
+     def __init__(self):
+         self.score = 0
+     def roll_again(self):
+         if self.score < 20:
+             return True
+         else:
+             return False
+
 
 class Eight_Rolls_Pig:
     def __init__(self):
@@ -97,14 +106,6 @@ class Ninety_Percent_Pig:
          else:
              return False
 
-class Optimal_Pig:
-     def __init__(self):
-         self.score = 0
-     def roll_again(self):
-         if self.score < 20:
-             return True
-         else:
-             return False
 
 
 def roll_dice():
